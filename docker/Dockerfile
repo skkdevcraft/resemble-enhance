@@ -31,8 +31,13 @@ RUN pip install -e .
 
 WORKDIR /workspace
 
+# download the model
+COPY docker/download_models.py .
+RUN python download_models.py
+
 COPY docker/convert_audio.sh .
 COPY docker/denoise.sh .
 COPY docker/enhance.sh .
+COPY docker/replace_audio.sh .
 
 RUN chmod +x convert_audio.sh enhance.sh denoise.sh
